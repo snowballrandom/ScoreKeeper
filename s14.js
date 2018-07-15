@@ -93,9 +93,9 @@ p1.addEventListener("click", function () {
      if(p1Score === winningScore || winningScore <= 0){
         gameOver = true;
         console.log('GAME OVER!!');
-         message = 'Game Over!';
+         message = 'Game Over! - Player 1 WINS!!!';
          p1Display.classList.remove('badge-dark');
-         p1Display.classList.add('badge-success');         
+         p1Display.classList.add('badge-success');
      }
     }
 
@@ -109,9 +109,9 @@ p2.addEventListener("click", function () {
         if(p2Score === winningScore || winningScore <= 0){
             gameOver = true;
             console.log('GAME OVER!!');
-            message = 'Game Over!';
+            message = 'Game Over! - Player 2 WINS!!!';
             p2Display.classList.remove('badge-dark');
-            p2Display.classList.add('badge-success');            
+            p2Display.classList.add('badge-success');
         }
     }
 
@@ -120,12 +120,29 @@ p2.addEventListener("click", function () {
 });
 
 reset.addEventListener("click", function(){
+    resetGame();
+});
+
+maxScore.addEventListener("input", function () {
+
+    resetGame();
+
+    if(isNaN(this.value) || this.value == "" || this.value < 0 ){
+        setMessage('Must Enter A Positive Number!!')
+
+    }else {
+        winningScore = parseFloat(maxScore.value);
+        setWinScore(winningScore);
+    }
+});
+
+function resetGame(){
     gameOver = false;
     p1Score = 0;
     p2Score = 0;
     p1Display.innerHTML = 0;
     p2Display.innerHTML = 0;
-    
+
     if(p1Display.classList.contains('badge-success')){
         p1Display.classList.remove("badge-success");
         p1Display.classList.add("badge-dark");
@@ -134,16 +151,10 @@ reset.addEventListener("click", function(){
         p2Display.classList.remove('badge-success');
         p2Display.classList.add('badge-dark');
     }
-    
+
     console.log('GAME RESET!');
     setMessage('Game Reset!');
-});
-
-maxScore.addEventListener("input", function () {
-
-    winningScore = parseFloat(maxScore.value);
-    setWinScore(winningScore)
-});
+}
 
 function setMessage(val){
     msgDisplay.innerHTML = val;
