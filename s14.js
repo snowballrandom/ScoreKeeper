@@ -94,6 +94,8 @@ p1.addEventListener("click", function () {
         gameOver = true;
         console.log('GAME OVER!!');
          message = 'Game Over!';
+         p1Display.classList.remove('badge-dark');
+         p1Display.classList.add('badge-success');         
      }
     }
 
@@ -108,6 +110,8 @@ p2.addEventListener("click", function () {
             gameOver = true;
             console.log('GAME OVER!!');
             message = 'Game Over!';
+            p2Display.classList.remove('badge-dark');
+            p2Display.classList.add('badge-success');            
         }
     }
 
@@ -121,6 +125,16 @@ reset.addEventListener("click", function(){
     p2Score = 0;
     p1Display.innerHTML = 0;
     p2Display.innerHTML = 0;
+    
+    if(p1Display.classList.contains('badge-success')){
+        p1Display.classList.remove("badge-success");
+        p1Display.classList.add("badge-dark");
+    }
+    if(p2Display.classList.contains('badge-success')) {
+        p2Display.classList.remove('badge-success');
+        p2Display.classList.add('badge-dark');
+    }
+    
     console.log('GAME RESET!');
     setMessage('Game Reset!');
 });
